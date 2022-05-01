@@ -1,23 +1,41 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState } from "react";
+import "./App.scss";
+import Counter from "./component/Counter";
+import Header from "./component/Header";
+import Footer from "./component/Footer";
 
 function App() {
+  const [counter, setCounter] = useState([0]);
+
+  // console.log(newCounter);
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
+      <Header title="React Conter V3" />
+      <div className="add-counter">
+        <button
+          onClick={() => {
+            const newCounter = [...counter];
+            newCounter.push(0);
+            setCounter(newCounter);
+          }}
         >
-          Learn React
-        </a>
-      </header>
+          Add-Counter
+        </button>
+      </div>
+      {counter.map((item, index) => {
+        console.log(index);
+        return (
+          <Counter
+            key={index}
+            index={index}
+            item={item}
+            setCounter={setCounter}
+            counter={counter}
+          />
+        );
+      })}
+
+      <Footer title="Made with React by Doud " />
     </div>
   );
 }
